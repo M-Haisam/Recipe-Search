@@ -4,8 +4,120 @@
         <title>Recipe Search</title>
         <link rel="shortcut icon" href=#>
         <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Arimo:400,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     </head>
     <body>
+        <header>
+            <nav>
+                <a href=# class="logo-link">
+                    <img src="assets/images/restaurant.svg" class="logo-img">
+                </a>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href=# class="nav-link">Cuisines</a></li>
+                    <li class="nav-item"><a href=# class="nav-link">About</a></li>
+                    <li class="nav-item"><a href=# class="nav-link" id="signup-link">Sign up</a>&#124;<a href=# class="nav-link" id="login-link">Login</a></li>
+                </ul>
+            </nav>
+            <section class="main">
+                <form class="search-box">
+                    <div>
+                        <p class="form-item">
+                        <label for="search-bar">Recipe name or ingredient</label>
+                        <input type="text" id="search-bar" name="search-bar" placeholder="Search">
+                        </p>
+                        <p class="form-item">
+                        <label for="course-select">Course</label>
+                        <select id="course-select">
+                            <option value="">All courses</option>
+                            <option value="appetizer">Appetizers</option>
+                            <option value="main-dish">Main dish</option>
+                            <option value="side-dish">Side dish</option>
+                            <option value="dessert">Dessert</option>
+    <!--
+                            <option value="soup">Soup</option>
+                            <option value="salad">Salad</option>
+    -->
+                        </select>
+                        </p>
+                    </div>
+                    <div class="search-tags">
+                    
+                    </div>
+                    <div>
+                        <p class="form-item">
+                        <label for="diet-select">Diet</label>
+                        <select id="diet-select">
+                            <option value="">Any</option>
+                            <option value="lacto-vegetarian">Lacto vegetarian</option>
+                            <option value="ovo-vegetarian">Ovo vegetarian</option>
+                            <option value="pescetarian">Pescetarian</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="vegetarian">Vegetarian</option>
+                        </select>
+                        </p>
+                        <p class="form-item">
+                        <label for="allergy-select">Allergies</label>
+                        <select id="allergy-select">
+                            <option value="">None</option>
+                            <option value="dairy">Dairy</option>
+                            <option value="egg">Egg</option>
+                            <option value="gluten">Gluten</option>
+                            <option value="peanut">Peanut</option>
+                            <option value="seafood">Seafood</option>
+                            <option value="sesame">Sesame</option>
+                            <option value="wheat">Wheat</option>            
+                        </select>
+                        </p>
+                        
+                        <button type="submit" id="search-btn" name="search-btn">Search</button>
+                    </div>
+                </form>
+                
+                <ul class="category-list">
+                    <li class="category-item"><a href=# class="category-link">Festive</a></li>
+                    <li class="category-item"><a href=# class="category-link">Sweet</a></li>
+                    <li class="category-item"><a href=# class="category-link">Spicy</a></li>
+                    <li class="category-item"><a href=# class="category-link">Vegan</a></li>
+                </ul>
+            </section>
+        </header>
+        
+        <section class="homepage-recipes">
+            <h2>Popular Recipes</h2>
+            <p id="attribution"></p>
+            <div id="recipe-container">
+                
+            </div>
+            
+        </section>
+        
+        <footer>
+            <div class="footer-container">
+                <h1 class="logo">LOGO</h1>
+
+                <ul class="quick-links">
+                    <li class="footer-item"><a href=# class="footer-link">About</a></li>
+                    <li class="footer-item"><a href=# class="footer-link">Sign up</a> <a href=# class="footer-link">Login</a></li>
+
+<!--
+                <article class="footer-cuisine-container">
+                    <h2 class="footer-cuisine-heading">Cuisines</h2>
+                    <ul class="footer-cuisine">
+                        <li class="cuisine-item"><a href=# class="cuisine-link">American</a></li>
+                        <li class="cuisine-item"><a href=# class="cuisine-link">Italian</a></li>
+                        <li class="cuisine-item"><a href=# class="cuisine-link">Asian</a></li>
+                        <li class="cuisine-item"><a href=# class="cuisine-link">Mexican</a></li>
+                        <li class="cuisine-item"><a href=# class="cuisine-link">Indian</a></li>
+                        <li class="cuisine-item"><a href=# class="cuisine-link">Thai</a></li>
+                        <li class="cuisine-item"><a href=# class="cuisine-link">Greek</a></li>
+                    </ul>
+                </article>
+-->
+                
+            </div>
+        </footer>
+<!--
         <div>
             <input type="text" id="search-bar" name="search-bar" placeholder="Search">
             <button type="button" id="search-btn" name="search-btn">Search</button>
@@ -13,6 +125,7 @@
 
             </section>
         </div>
-        <script src="script.js"></script>
+-->
+        <script src="script.js"></scrpt>
     </body>
 </html>
