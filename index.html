@@ -16,10 +16,10 @@
                 <ul class="nav-list">
                     <li class="nav-item"><a href=# class="nav-link">Cuisines</a></li>
                     <li class="nav-item"><a href=# class="nav-link">About</a></li>
-                    <li class="nav-item"><a href=# class="nav-link" id="signup-link">Sign up</a>&#124;<a href=# class="nav-link" id="login-link">Login</a></li>
+                    <li class="nav-item"><a href=# class="nav-link" id="nav-signup-link">Sign up</a>&#124;<a href=# class="nav-link" id="nav-login-link">Login</a></li>
                 </ul>
             </nav>
-            <section class="main">
+            <main>
                 <form class="search-box">
                     <div>
                         <p class="form-item">
@@ -30,10 +30,10 @@
                         <label for="course-select">Course</label>
                         <select id="course-select">
                             <option value="">All courses</option>
-                            <option value="appetizer">Appetizers</option>
-                            <option value="main-dish">Main dish</option>
-                            <option value="side-dish">Side dish</option>
-                            <option value="dessert">Dessert</option>
+                            <option value="course^course-Appetizers">Appetizers</option>
+                            <option value="course^course-Main Dishes">Main dishes</option>
+                            <option value="course^course-Side Dishes">Side dishes</option>
+                            <option value="course^course-Desserts">Desserts</option>
     <!--
                             <option value="soup">Soup</option>
                             <option value="salad">Salad</option>
@@ -41,50 +41,55 @@
                         </select>
                         </p>
                     </div>
-                    <div class="search-tags">
-                    
-                    </div>
+<!--
+                    <ul id="search-tags">
+                        <li class="tag-item">Vegan</li>
+                        <li class="tag-item">Vegetarian</li>
+                    </ul>
+-->
                     <div>
                         <p class="form-item">
                         <label for="diet-select">Diet</label>
                         <select id="diet-select">
                             <option value="">Any</option>
-                            <option value="lacto-vegetarian">Lacto vegetarian</option>
-                            <option value="ovo-vegetarian">Ovo vegetarian</option>
-                            <option value="pescetarian">Pescetarian</option>
-                            <option value="vegan">Vegan</option>
-                            <option value="vegetarian">Vegetarian</option>
+                            <option value="388^Lacto vegetarian">Lacto vegetarian</option>
+                            <option value="389^Ovo vegetarian">Ovo vegetarian</option>
+                            <option value="390^Pescetarian">Pescetarian</option>
+                            <option value="386^Vegan">Vegan</option>
+                            <option value="387^Lacto-ovo vegetarian">Vegetarian</option>
                         </select>
                         </p>
                         <p class="form-item">
-                        <label for="allergy-select">Allergies</label>
+                        <label for="allergy-select">Allergy</label>
                         <select id="allergy-select">
                             <option value="">None</option>
-                            <option value="dairy">Dairy</option>
-                            <option value="egg">Egg</option>
-                            <option value="gluten">Gluten</option>
-                            <option value="peanut">Peanut</option>
-                            <option value="seafood">Seafood</option>
+                            <option value="396^Dairy-Free">Dairy</option>
+                            <option value="397^Egg-Free">Egg</option>
+                            <option value="393^Gluten-Free">Gluten</option>
+                            <option value="394^Peanut-Free">Peanut</option>
+                            <option value="398^Seafood-Free">Seafood</option>
+<!--
                             <option value="sesame">Sesame</option>
                             <option value="wheat">Wheat</option>            
+-->
                         </select>
                         </p>
                         
-                        <button type="submit" id="search-btn" name="search-btn">Search</button>
+                        <button type="button" id="search-btn" name="search-btn">Search</button>
                     </div>
                 </form>
                 
-                <ul class="category-list">
-                    <li class="category-item"><a href=# class="category-link">Festive</a></li>
-                    <li class="category-item"><a href=# class="category-link">Sweet</a></li>
-                    <li class="category-item"><a href=# class="category-link">Spicy</a></li>
-                    <li class="category-item"><a href=# class="category-link">Vegan</a></li>
+                <ul class="suggested-list">
+                    <li class="suggested-item"><button class="suggested-btn" id="festive">Festive</button></li>
+                    <li class="suggested-item"><button class="suggested-btn" id="sweet">Sweet</button></li>
+                    <li class="suggested-item"><button class="suggested-btn" id="spicy">Spicy</button></li>
+                    <li class="suggested-item"><button class="suggested-btn" id="vegan">Vegan</button></li>
                 </ul>
-            </section>
+            </main>
         </header>
         
         <section class="homepage-recipes">
-            <h2>Popular Recipes</h2>
+            <h2 id="homepage-recipes-heading">Popular Recipes</h2>
             <p id="attribution"></p>
             <div id="recipe-container">
                 
@@ -92,13 +97,23 @@
             
         </section>
         
+        <section class="homepage-signup">
+            <div class="homepage-signup-background">
+                <div class="homepage-signup-container">
+                    <h2 class="homepage-signup-heading">Sign up now to save your favorite recipes</h2>
+                    <a href=# class="homepage-signup-link">Sign Up</a>
+                </div>
+            </div>
+        </section>
+        
         <footer>
             <div class="footer-container">
-                <h1 class="logo">LOGO</h1>
+                <h2 class="logo">LOGO</h2>
 
                 <ul class="quick-links">
                     <li class="footer-item"><a href=# class="footer-link">About</a></li>
                     <li class="footer-item"><a href=# class="footer-link">Sign up</a> <a href=# class="footer-link">Login</a></li>
+                </ul>
 
 <!--
                 <article class="footer-cuisine-container">
@@ -126,6 +141,6 @@
             </section>
         </div>
 -->
-        <script src="script.js"></scrpt>
+        <script src="script.js"></sript>
     </body>
 </html>
