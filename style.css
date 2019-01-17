@@ -48,6 +48,7 @@ body {
     box-sizing: border-box;
     font-size: 1.6rem;
     font-family: 'Arimo', sans-serif;
+    position: relative;
 }
 
 header {
@@ -244,13 +245,9 @@ select {
     position: relative;
 }
 
-.recipe:hover {
-    cursor: pointer;
-}
-
 .recipe-img {
     width: 100%;
-    height: ;
+    cursor: pointer;
 }
 
 .recipe-name {
@@ -268,8 +265,12 @@ select {
     top: 95%;
 }
 
-.far {
+.empty-star {
     color: #666666;
+}
+
+.full-star {
+    color: #fcf503;
 }
 
 .recipe-time {
@@ -283,13 +284,40 @@ select {
     display: none;
 }
 
-.info-container {
+#overlay {
+    position:absolute;
+    background: rgba(0,0,0,0.3);
+    left:0;
+    top:0;
+    z-index:1;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+
+#info-container {
     border: 2px solid;
-    width: 50%;
+    height: 75%;
+    width: 40%;
+    background: white;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.close-icon {
+    cursor: pointer;
 }
 
 .enlarged-img {
     width: 100%;
+}
+
+.enlarged-rating {
+    
 }
 /* End Homepage recipes */
 

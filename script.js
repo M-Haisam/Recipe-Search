@@ -16,6 +16,8 @@ window.onload = function() {
 
 // End Homepage
 
+var body = document.getElementsByTagName('body');
+
 var searchBar = document.getElementById('search-bar');
 var searchButton = document.getElementById('search-btn');
 
@@ -25,6 +27,9 @@ var allergyDropdown = document.getElementById('allergy-select');
 
 var suggestedButtons = document.getElementsByClassName('suggested-btn');
 suggestedRecipes()
+
+var overlay = document.getElementById('overlay');
+var infoContainer = document.getElementById('info-container');
 
 var attribution = document.getElementById('attribution');
 var homepageRecipesHeading = document.getElementById('homepage-recipes-heading');
@@ -56,28 +61,7 @@ function makeRequest() {
     httpRequest.send();
 }
 
-//function for GET RECIPE API call
-//function additionalInfo(info) {
-//    var recipe = info.matches;
-//    var attribution = info.attribution;
-//    
-//    recipe.forEach(function(i) {
-//
-//        var httpRequest = new XMLHttpRequest();
-//        //Recipe ID from response 
-//        var recipeID = i.id;
-////        console.log(recipeID);
-//        var url = "http://api.yummly.com/v1/api/recipe/" + recipeID + "?_app_id=66e91053&_app_key=a92012752df81d1908ca0373af73e364"; 
-//            
-//        httpRequest.open('GET', url);
-//        httpRequest.responseType = 'json';
-//        httpRequest.onload = function() { 
-//            var recipeInfo = httpRequest.response; 
-//            displayResults(recipeInfo);
-//        };
-//        httpRequest.send();
-//    })
-//}
+
 
 
 function suggestedRecipes() {
@@ -200,6 +184,8 @@ function expandRecipe() {
     
     for (var i=0;i<displayedRecipes.length;i++) {
         displayedRecipes[i].onclick = function() {
+            overlay.style.display = 'block';
+            body[0].style.overflow = 'hidden';
             var httpRequest = new XMLHttpRequest();
             var recipeID = this.lastChild.textContent;
             var url = "http://api.yummly.com/v1/api/recipe/" + recipeID + "?_app_id=66e91053&_app_key=a92012752df81d1908ca0373af73e364";
@@ -222,11 +208,9 @@ function displayAdditionalInfo(results) {
     var nutritionalInfo = results.nutritionEstimates;
 
     console.log(results);
+    infoContainer.innerHTML = "";
     
-//    var container = document.createElement('article');
-    var infoContainer = document.createElement('article');
-    infoContainer.className = "info-container";
-    
+    var cross = document.createElement('i');
     var recipeImg = document.createElement('img');
     var recipeName = document.createElement('h2');
     var recipeSource = document.createElement('a');
@@ -251,12 +235,14 @@ function displayAdditionalInfo(results) {
         }
     }
     
+    cross.className = "close-icon fas fa-times"
     recipeImg.src = imgSrc['hostedLargeUrl'];
     recipeName.textContent = results.name;
     recipeSource.href = results.source['sourceRecipeUrl'];
     recipeSource.textContent = results.source['sourceDisplayName'];
     recipeAttribution.innerHTML = results.attribution['html'];
     
+    infoContainer.appendChild(cross);
     infoContainer.appendChild(recipeImg);
     infoContainer.appendChild(recipeName);
     infoContainer.appendChild(recipeSource);
@@ -264,7 +250,7 @@ function displayAdditionalInfo(results) {
     infoContainer.appendChild(ingredientList);
     infoContainer.appendChild(recipeCalories);
     infoContainer.appendChild(recipeAttribution);
-    container.appendChild(infoContainer);
+    overlay.appendChild(infoContainer);
     
     recipeImg.className = "enlarged-img";
     recipeName.className = "enlarged-name";
@@ -272,22 +258,11 @@ function displayAdditionalInfo(results) {
     recipeRating.className = "enlarged-rating";
     ingredientList.className = "ingredient-list";
     recipeCalories.className = "recipe-calories";
+    
+    cross.onclick = closeOverlay;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function closeOverlay() {
+    overlay.style.display = 'none';
+    body[0].style.overflow = 'auto';
+}
