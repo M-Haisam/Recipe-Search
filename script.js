@@ -9,6 +9,9 @@ window.onload = function() {
     httpRequest.onload = function() {
         var results = httpRequest.response;
         displayResults(results);
+        viewMore.onclick = function(){
+            moreResults(url);
+        };
     };
     httpRequest.send();
 };
@@ -17,6 +20,11 @@ window.onload = function() {
 // End Homepage
 
 var body = document.getElementsByTagName('body');
+
+var scrollButton = document.getElementById('scroll-btn');
+scrollButton.onclick = function() {
+    animateToTop();
+}
 
 var searchBar = document.getElementById('search-bar');
 var searchButton = document.getElementById('search-btn');
@@ -35,8 +43,11 @@ var attribution = document.getElementById('attribution');
 var homepageRecipesHeading = document.getElementById('homepage-recipes-heading');
 var recipeContainer = document.getElementById('recipe-container');
 
+var viewMore = document.getElementById('view-more-btn');
+
 //Run function on Button click
 searchButton.addEventListener('click', makeRequest);
+
 
 //function for SEARCH RECIPE API call
 function makeRequest() {
@@ -53,70 +64,21 @@ function makeRequest() {
     httpRequest.responseType = 'json';
     httpRequest.onload = function() {
         var results = httpRequest.response;
-        recipeContainer.innerHTML = "";
         changeHeading(results);
-        displayResults(results); 
-        
+        recipeContainer.innerHTML = "";
+        displayResults(results);
+        viewMore.onclick = function(){
+            moreResults(url);
+        };
     };
     httpRequest.send();
 }
 
 
 
-
-function suggestedRecipes() {
-    var url;
-    
-    for (var i=0;i<suggestedButtons.length;i++) {
-        suggestedButtons[i].onclick = function suggestedRecipesRequest() {
-            
-            if (this.id === "festive") {
-                url = "http://api.yummly.com/v1/api/recipes?_app_id=66e91053&_app_key=a92012752df81d1908ca0373af73e364&maxResult=12&requirePictures=true&allowedHoliday[]=holiday^holiday-christmas&allowedHoliday[]=holiday^holiday-thanksgiving";
-            }
-            else if (this.id === "sweet") {
-                url = "http://api.yummly.com/v1/api/recipes?_app_id=66e91053&_app_key=a92012752df81d1908ca0373af73e364&maxResult=12&requirePictures=true&flavor.sweet.min=0.4&flavor.sweet.max=1";
-            }
-            else if (this.id === "spicy") {
-                url = "http://api.yummly.com/v1/api/recipes?_app_id=66e91053&_app_key=a92012752df81d1908ca0373af73e364&maxResult=12&requirePictures=true&flavor.piquant.min=0.4&flavor.piquant.max=1";
-            }
-            else if (this.id === "vegan") {
-                url = "http://api.yummly.com/v1/api/recipes?_app_id=66e91053&_app_key=a92012752df81d1908ca0373af73e364&maxResult=12&requirePictures=true&allowedDiet[]=386^Vegan";
-            }
-            
-            var httpRequest = new XMLHttpRequest();
-            httpRequest.open('GET', url);
-            httpRequest.responseType = 'json';
-            httpRequest.onload = function() {
-                var results = httpRequest.response;
-                changeHeading(results);
-                displayResults(results);
-            };
-            httpRequest.send();
-        }
-    }
-}
-
-function changeHeading(result) {
-    var courseText = courseDropdown.options[courseDropdown.selectedIndex].text;
-    var totalMatches = result.totalMatchCount;
-    var searchTerm = result.criteria;
-    
-    if (searchTerm.q === null) {
-        homepageRecipesHeading.textContent = totalMatches + " results found";
-    } else if (courseText !== "All courses") {
-        homepageRecipesHeading.textContent = totalMatches + " results found for " + searchTerm.q + " " + courseText;
-    } else {
-        homepageRecipesHeading.textContent = totalMatches + " results found for " + searchTerm.q;
-    }
-    
-    homepageRecipesHeading.style.textTransform = "lowercase";
-}
-
-
-
 //function to display results
 function displayResults(result) {
-    recipeContainer.innerHTML = "";
+    
     var recipe = result.matches;
     var attr = result.attribution;
     attribution.innerHTML = attr.html;
@@ -160,24 +122,6 @@ function displayResults(result) {
         }
     }
 }
-
-//function to convert number rating to stars
-function ratingStars(stars, container) {
-    var remaining = 5 - stars;
-    if (stars <= 5 && stars >= 0) {
-        for (var i=0;i<stars;i++) {
-            var fullStar = document.createElement('span');
-            fullStar.className = "fas fa-star";
-            container.appendChild(fullStar)
-        };
-        for (i=0;i<remaining;i++) {
-            var emptyStar = document.createElement('span');
-            emptyStar.className = "far fa-star";
-            container.appendChild(emptyStar)
-        };
-    }
-}    
-   
 
 function expandRecipe() {
     var displayedRecipes = document.getElementsByClassName('recipe');
@@ -260,9 +204,119 @@ function displayAdditionalInfo(results) {
     recipeCalories.className = "recipe-calories";
     
     cross.onclick = closeOverlay;
+    function closeOverlay() {
+        overlay.style.display = 'none';
+        body[0].style.overflow = 'auto';
+    }
 }
 
-function closeOverlay() {
-    overlay.style.display = 'none';
-    body[0].style.overflow = 'auto';
+function suggestedRecipes() {
+    var url;
+    
+    for (var i=0;i<suggestedButtons.length;i++) {
+        suggestedButtons[i].onclick = function suggestedRecipesRequest() {
+            
+            if (this.id === "festive") {
+                url = "http://api.yummly.com/v1/api/recipes?_app_id=66e91053&_app_key=a92012752df81d1908ca0373af73e364&maxResult=12&requirePictures=true&allowedHoliday[]=holiday^holiday-christmas&allowedHoliday[]=holiday^holiday-thanksgiving";
+            }
+            else if (this.id === "sweet") {
+                url = "http://api.yummly.com/v1/api/recipes?_app_id=66e91053&_app_key=a92012752df81d1908ca0373af73e364&maxResult=12&requirePictures=true&flavor.sweet.min=0.4&flavor.sweet.max=1";
+            }
+            else if (this.id === "spicy") {
+                url = "http://api.yummly.com/v1/api/recipes?_app_id=66e91053&_app_key=a92012752df81d1908ca0373af73e364&maxResult=12&requirePictures=true&flavor.piquant.min=0.4&flavor.piquant.max=1";
+            }
+            else if (this.id === "vegan") {
+                url = "http://api.yummly.com/v1/api/recipes?_app_id=66e91053&_app_key=a92012752df81d1908ca0373af73e364&maxResult=12&requirePictures=true&allowedDiet[]=386^Vegan";
+            }
+            
+            var httpRequest = new XMLHttpRequest();
+            httpRequest.open('GET', url);
+            httpRequest.responseType = 'json';
+            httpRequest.onload = function() {
+                var results = httpRequest.response;
+                changeHeading(results);
+                recipeContainer.innerHTML = "";
+                displayResults(results);
+                viewMore.onclick = function(){
+                    moreResults(url);
+                };
+            };
+            httpRequest.send();
+        }
+    }
 }
+
+
+function moreResults(url) {
+    var currentResults = document.getElementsByClassName('recipe').length;
+    var nextResults = currentResults + 12;
+    
+    var httpRequest = new XMLHttpRequest();
+    
+    url += "&start=" + nextResults;
+    console.log(url);
+    
+    httpRequest.open('GET', url);
+    httpRequest.responseType = 'json';
+    httpRequest.onload = function() {
+        var results = httpRequest.response;
+        displayResults(results);
+    };
+    httpRequest.send();
+}
+
+function changeHeading(result) {
+    var courseText = courseDropdown.options[courseDropdown.selectedIndex].text;
+    var totalMatches = result.totalMatchCount;
+    var searchTerm = result.criteria;
+    
+    if (searchTerm.q === null) {
+        homepageRecipesHeading.textContent = totalMatches + " results found";
+    } else if (courseText !== "All courses") {
+        homepageRecipesHeading.textContent = totalMatches + " results found for " + searchTerm.q + " " + courseText;
+    } else {
+        homepageRecipesHeading.textContent = totalMatches + " results found for " + searchTerm.q;
+    }
+    
+    homepageRecipesHeading.style.textTransform = "lowercase";
+}
+
+//function to convert number rating to stars
+function ratingStars(stars, container) {
+    var remaining = 5 - stars;
+    if (stars <= 5 && stars >= 0) {
+        for (var i=0;i<stars;i++) {
+            var fullStar = document.createElement('span');
+            fullStar.className = "fas fa-star";
+            container.appendChild(fullStar)
+        };
+        for (i=0;i<remaining;i++) {
+            var emptyStar = document.createElement('span');
+            emptyStar.className = "far fa-star";
+            container.appendChild(emptyStar)
+        };
+    }
+}    
+
+
+
+function animateToTop() {
+    var scrollToTop = setInterval(function() {
+        var position = window.pageYOffset;
+        if (position > 0) {
+            window.scrollTo(0, position - 20);
+        } else {
+            clearInterval(scrollToTop);
+        }
+    }, 1);
+}
+
+//function scrollToTop() {
+//    if (window.pageYOffset != 0) {
+//        setTimeout(function() {
+//            window.scrollTo(0, window.pageYOffset - 30);
+//            scrollToTop();
+//        }, 1);
+//    }
+//}
+

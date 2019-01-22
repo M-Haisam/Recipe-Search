@@ -70,6 +70,7 @@ nav {
 
 .logo-link {
     margin-right: 650px;
+    transition: transform 0.6s ease-in-out;
 }
 
 .nav-list {
@@ -243,11 +244,11 @@ select {
     font-size: 1.6rem;
     vertical-align: middle;
     position: relative;
+    cursor: pointer;
 }
 
 .recipe-img {
     width: 100%;
-    cursor: pointer;
 }
 
 .recipe-name {
@@ -317,6 +318,37 @@ select {
 }
 
 .enlarged-rating {
+    
+}
+
+#scroll-btn {
+    position: fixed;
+    background-color: green;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    color: #fff;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+#scroll-btn:hover {
+    background-color: #fff;
+    color: green;
+}
+
+.view-more {
+    text-align: center;
+}
+
+#view-more-btn {
+    
+}
+
+.down-arrow {
     
 }
 /* End Homepage recipes */
